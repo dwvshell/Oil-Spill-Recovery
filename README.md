@@ -1,7 +1,4 @@
-Disclaimer: Confirm this package with qualified legislative counsel, tax counsel, and NRCan/CRA officials before filing or public distribution. This content is a draft template for counsel review and is not legal advice, not a substitute for parliamentary counsel, and does not create enforceable rights.
 
-What you will receive in this single copy‑paste deliverable
-- Full repository README (ready to paste into README.md)  
 - LICENSE templates (Apache 2.0 and CC BY 4.0 snippets)  
 - Contributor License Agreement template (CLA)  
 - CODEOFCONDUCT.md and SECURITY.md templates  
