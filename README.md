@@ -1,3 +1,530 @@
+Disclaimer: Confirm this package with qualified legislative counsel, tax counsel, and NRCan/CRA officials before filing or public distribution. This content is a draft template for counsel review and is not legal advice, not a substitute for parliamentary counsel, and does not create enforceable rights.
+
+What you will receive in this single copy‑paste deliverable
+- Full repository README (ready to paste into README.md)  
+- LICENSE templates (Apache 2.0 and CC BY 4.0 snippets)  
+- Contributor License Agreement template (CLA)  
+- CODEOFCONDUCT.md and SECURITY.md templates  
+- House formatted draft bill (English text, ready to paste into a bill submission document)  
+- Policy annex mapping to House Procedure and Standing Orders (concise checklist)  
+- CCUS ITC evidence checklist and Class mapping (NRCan/CRA submission template)  
+- SCADA telemetry schema YAML (compact, ready to paste into scada-telemetry-schema.yaml)  
+- Audit formulas (LaTeX ready for audit-formulas.md)  
+- Chain of custody and affidavit templates for court exhibits and notarizable telemetry evidence
+
+---
+
+Repository README (paste into README.md)
+
+`
+
+DWVSCPS Energy Industrial Control Design Kit
+
+Purpose
+Provide an auditable, standards-aligned design kit for ventilated secondary containment pipeline systems (DWVSCPS), SCADA telemetry auditing (SMT3), and CCUS tax credit evidence mapping.
+
+Disclaimer
+This repository contains draft policy, technical specifications, and legal templates for counsel review. It is not legal advice and does not create enforceable rights. Consult legislative counsel, tax counsel, and NRCan/CRA before filing or relying on these materials.
+
+Contents
+- LICENSE
+- README.md
+- CONTRIBUTING.md
+- CLA.md
+- CODEOFCONDUCT.md
+- SECURITY.md
+- docs/
+  - policy/legislative-concept.md
+  - policy/house-procedure-mapping.md
+  - ccus/ccus-evidence-checklist.md
+  - engineering/dwvscps-specification.md
+  - telemetry/scada-telemetry-schema.yaml
+  - audit/audit-formulas.md
+  - validation/test-protocols.md
+  - legal/court-exhibits/
+    - chain-of-custody-template.md
+    - affidavit-template.md
+- src/
+  - telemetry/
+  - simulations/
+  - examples/
+
+How to use
+1. Review docs/policy/legislative-concept.md with legislative counsel.
+2. Place notarizable exhibits in a secure private vault; publish non-sensitive artifacts publicly.
+3. Use CLA for contributor IP management.
+4. Prepare NRCan/CRA evidence package per docs/ccus/ccus-evidence-checklist.md.
+
+Primary contacts
+- Inventor and rights claimant: Richard Evan Stockford Jr
+- Primary custodian entity: 15389089 Canada Inc.
+
+`
+
+---
+
+LICENSE snippets (paste into LICENSE files)
+
+Apache 2.0 (for code and telemetry schemas)
+
+`
+                                 Apache License
+                           Version 2.0, January 2004
+                        http://www.apache.org/licenses/
+
+TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION.
+[Full Apache 2.0 text should be inserted here. Use the official Apache 2.0 license file from apache.org.]
+`
+
+Creative Commons Attribution 4.0 International (for docs and drawings)
+
+`
+Creative Commons Attribution 4.0 International
+https://creativecommons.org/licenses/by/4.0/legalcode
+
+[Insert full CC BY 4.0 legal code or link to official text.]
+`
+
+---
+
+Contributor License Agreement template (CLA.md)
+
+`
+Contributor License Agreement (CLA)
+
+By contributing to this repository you agree to the following terms:
+1. You grant to the Project Owner a perpetual, worldwide, non-exclusive, royalty-free license to use, reproduce, modify, distribute, and sublicense your contributions under the repository license(s).
+2. You warrant that you have the right to grant this license and that your contribution does not infringe third-party rights.
+3. You agree to follow the project's Code of Conduct and security reporting procedures.
+
+Contributor
+Name:
+Email:
+Date:
+Signature:
+
+Project Owner
+Name: 15389089 Canada Inc.
+Representative:
+Date:
+Signature:
+`
+
+---
+
+CODEOFCONDUCT.md (paste)
+
+`
+Contributor Covenant Code of Conduct
+
+Our Pledge
+We pledge to make participation in this project a harassment-free experience for everyone.
+
+Standards
+- Be respectful and professional.
+- No harassment, discrimination, or abusive language.
+- Report violations to the project maintainers.
+
+Enforcement
+Violations may result in removal of contributions and revocation of repository access.
+
+Contact
+Report incidents to: security@dwvscps.example (replace with project contact)
+`
+
+---
+
+SECURITY.md (paste)
+
+`
+Security Policy
+
+Reporting a Vulnerability
+- Email: security@dwvscps.example
+- PGP key: [insert PGP fingerprint]
+
+Process
+1. Acknowledge receipt within 48 hours.
+2. Coordinate disclosure timeline with reporter.
+3. Publish a CVE and advisory after mitigation.
+
+Sensitive Artifacts
+Store notarizable exhibits and vendor IP in a private vault with RBAC and audit logging.
+`
+
+---
+
+House formatted draft bill English text (copy‑paste ready)
+
+`
+House of Commons
+Session [], Parliament []
+
+BILL C[] — An Act to Enhance Critical Pipeline Infrastructure Security, Standardize Automated Audit Telemetry, and Establish the Voluntary Clean-Tech Insurance Protection Framework
+
+Preamble
+Whereas the protection of critical midstream energy infrastructure and the preservation of Canadian environmental resources are of national importance;
+Whereas undetected micro-ruptures in pressurized fluid transmission systems pose significant ecological risks to woodlands, farms, lakes, rivers, wetlands, and wildlife;
+Whereas the integration of ventilated secondary containment systems and real-time SCADA telemetry can reduce environmental clean-up liabilities and stabilize commercial insurance underwriting portfolios;
+Therefore Her Majesty, by and with the advice and consent of the Senate and House of Commons of Canada, enacts as follows:
+
+Part 1 Short Title and Interpretation
+1. Short Title
+This Act may be cited as the Critical Infrastructure and Asset Protection Act.
+
+2. Definitions
+In this Act,
+"DWVSCPS" means the Drain Waste Ventilation Stockford Contaminate Pipeline Shell, a ventilated secondary containment structure surrounding primary high-pressure transmission pipelines.
+"SMT3" means Smart Monitoring Technology 3, an automated SCADA telemetry and digital auditing dashboard.
+"Inventor" means Richard Evan Stockford Jr.
+"Master Vendor" means 15389089 Canada Inc.
+"Secondary Containment" means a physical outer jacket designed to release mechanical pressure safely while capturing and redirecting escaped fluid products into a localized chamber.
+"CCUS ITC" means the Canada Revenue Agency Investment Tax Credit for Carbon Capture, Utilization, and Storage.
+
+Part 2 Physical and Telemetric Safety Standards
+3. Secondary Containment Evaluation
+Operators of high-pressure liquid and gas pipelines traversing sensitive ecological zones shall evaluate the integration of ventilated secondary containment systems consistent with recognized engineering standards.
+
+4. Secondary Containment Performance
+A ventilated secondary containment system must be designed to:
+(a) safely relieve atmospheric and mechanical pressure surges;
+(b) isolate and capture escaped fluid products into a containment chamber;
+(c) provide a time window sufficient for controlled shutdown and isolation of the damaged segment.
+
+5. SCADA Telemetry Integration
+Operators shall implement continuous digital auditing dashboards that monitor primary and secondary pressure differentials, flow anomalies, and integrity signatures. Telemetry must be cryptographically signed and retained in accordance with regulations.
+
+6. Automated Shutoff Criteria
+Operators shall configure automated shutoff logic to actuate valves when verified structural anomalies are detected, subject to operator override and manual safe-state procedures.
+
+Part 3 Regulatory Alignment and Tax Mapping
+7. Regulatory Coordination
+The Governor in Council may, by regulation, specify performance standards and designate recognized technical standards bodies for the purposes of this Act.
+
+8. CCUS ITC Mapping
+For the purposes of claiming CCUS ITC benefits, verified secondary containment systems and associated capture infrastructure may be mapped to applicable capital cost allowance classes subject to NRCan verification and CRA administration.
+
+Part 4 Audit Verification and Evidence
+9. Telemetry Audit Standards
+The Minister may prescribe telemetry schemas, signing requirements, retention periods, and chain-of-custody protocols for audit verification.
+
+10. Independent Verification
+Projects seeking tax credits or regulatory relief under this Act must submit independent verification reports, laboratory test results, and notarized chain-of-custody exhibits.
+
+Part 5 General
+11. Offences and Penalties
+Contravention of regulations made under this Act may attract administrative penalties as prescribed.
+
+12. Coming into Force
+This Act comes into force on a day to be fixed by order of the Governor in Council.
+
+EXPLANATORY NOTE
+This Bill establishes performance-based requirements for ventilated secondary containment, SCADA telemetry auditing, and a framework for mapping verified assets to CCUS tax credit classifications. It provides for regulatory coordination, telemetry standards, and independent verification requirements.
+
+`
+
+---
+
+Policy annex mapping to House Procedure and Standing Orders (paste into docs/policy/house-procedure-mapping.md)
+
+`
+House Procedure Mapping Checklist
+
+1. Determine route
+- Private Member's Bill or Government Bill
+- If Private Member's Bill, follow House of Commons Procedure and Practice Chapter 21 and Chapter 23.
+
+2. Draft certification
+- Engage Parliamentary Counsel to format bill per House style.
+
+3. Filing steps
+- Prepare Notice of Intent and sponsor details.
+- File with Table Office per Standing Orders.
+
+4. Committee and Report
+- Anticipate referral to Standing Committee with jurisdiction over natural resources and environment.
+- Prepare briefing materials for committee and for public witnesses.
+
+5. Amendments
+- Prepare amendment templates for Committee and Report stages.
+
+6. Private Bills considerations
+- If private bill elements apply, follow Chapter XV Private Bills practice.
+
+References for counsel
+- House of Commons Procedure and Practice Fourth Edition 2025 Chapter 16, 21, 23.
+- Standing Orders of the House of Commons Chapters VI, VIII, IX, XI, XIII, XV.
+- LEGISinfo for tracking and ownership records.
+`
+
+---
+
+CCUS ITC evidence checklist and Class mapping (paste into docs/ccus/ccus-evidence-checklist.md)
+
+`
+CCUS ITC Evidence Checklist
+
+Project identification
+- Project name
+- Project owner legal entity
+- NRCan project registration number (if assigned)
+
+Technical exhibits
+- Engineering drawings of DWVSCPS and capture interfaces
+- Materials specifications and vendor declarations
+- Laboratory test reports for containment capture efficiency
+
+Telemetry exhibits
+- Signed telemetry envelopes for representative events
+- Telemetry retention logs and hash chain
+
+Financial exhibits
+- Capital cost breakdown by asset class
+- Depreciation schedule and proposed CCA class mapping
+
+Independent verification
+- Third-party engineering verification report
+- Notarized chain-of-custody for telemetry and test samples
+
+Class mapping guidance
+- Class 57: Specialized carbon capture equipment (separation units)
+- Class 58: Transmission and storage infrastructure for captured CO2
+- Note: Final class eligibility determined by NRCan and CRA verification
+
+Submission steps
+1. Prepare evidence package per NRCan guidance.
+2. Submit to NRCan for technical verification.
+3. Upon NRCan confirmation, file CRA claim with supporting exhibits.
+`
+
+---
+
+SCADA telemetry schema YAML (paste into scada-telemetry-schema.yaml)
+
+`yaml
+schema_version: 1.0
+telemetry_batch:
+  batch_id: string
+  batch_hash: hex
+  signer_id: string
+  certificate_chain: string
+  timestamp_utc: datetime
+records:
+  - record_id: string
+    timestamp_utc: datetime
+    sensor_id: string
+    sensortype: enum [pressure, temperature, flow, vibration, valvestate]
+    pressureprimarykpa: number
+    pressuresecondarykpa: number
+    differential_kpa: number
+    flowratem3s: number
+    temperature_c: number
+    event_code: string
+    anomaly_score: number
+    signature: hex
+retention_policy:
+  retention_days: integer
+  archivalmethod: enum [coldarchive, hot_archive]
+chainofcustody:
+  recorded_by: string
+  recorded_at: datetime
+  custody_transfers:
+    - transferred_to: string
+      transferred_at: datetime
+      transfer_hash: hex
+`
+
+---
+
+Audit formulas (paste into audit/audit-formulas.md)
+
+`
+Audit Formulas
+
+Leak volume estimation
+Use differential flow integration to estimate leak volume.
+
+LaTeX
+\[
+V{\text{leak}} = \int{t0}^{t1} \left( Q{\text{measured}}(t) - Q{\text{expected}}(t) \right) \, dt
+\]
+
+Time to isolation
+Given valve actuation latency and detection time:
+
+LaTeX
+\[
+T{\text{isolation}} = T{\text{detection}} + T{\text{actuation}} + T{\text{mechanical}}
+\]
+
+Net yield for CCUS asset mapping
+Depreciation and net present value calculations should follow accepted accounting standards and CRA guidance.
+
+LaTeX
+\[
+\text{NPV} = \sum{t=0}^{N} \frac{Rt - C_t}{(1 + r)^t}
+\]
+`
+
+---
+
+Chain of custody and affidavit templates (paste into docs/legal/court-exhibits)
+
+chain-of-custody-template.md
+`
+Chain of Custody for Telemetry Exhibit
+
+Exhibit ID:
+Description:
+Collected by:
+Collection location:
+Collection timestamp (UTC):
+Initial hash:
+Custody log:
+- DateTime UTC | From | To | Transfer hash | Notes
+
+Certification
+I certify under oath that the above chain of custody is complete and accurate.
+Name:
+Title:
+Signature:
+Date:
+`
+
+affidavit-template.md
+`
+Affidavit of Authentication
+
+I, [Name], of [City], in the Province of [Province], MAKE OATH AND SAY AS FOLLOWS:
+1. I am [position] of [entity] and have personal knowledge of the matters herein.
+2. The attached telemetry batch identified as Exhibit [ID] was collected on [date] at [location].
+3. The telemetry batch hash is [hash]. The chain of custody is recorded in the attached log.
+4. The telemetry was signed using the private key of [signer_id] and the certificate chain is attached.
+5. I swear this affidavit for the purpose of authenticating the telemetry exhibit in [court name].
+
+Sworn before me at [place] on [date].
+Commissioner for Oaths / Notary Public
+Signature:
+`
+
+---
+
+Final instructions for filing and counsel handoff
+- Do not file the draft bill without parliamentary counsel certification. Provide the legislative-concept.md and this bill text to Parliamentary Counsel for formal drafting and bilingual translation.
+- Place notarizable exhibits in a secure private vault and obtain notarized affidavits before court filing.
+- Submit CCUS evidence to NRCan for technical verification prior to CRA claim filing.
+- Record ownership: register inventor claims and any patent filings with counsel; maintain contributor CLAs for IP clarity.
+
+---
+
+If you confirm, I will:
+- Produce the full legislative-concept.md with clause-by-clause commentary and amendment templates for Committee and Report stages.
+- Generate the CONTRIBUTING.md, full CLA form with signature fields, and a redacted public bill plus sealed private bill for counsel.
+
+Confirm which of the above you want next and I will paste the requested files in full.
+Contributor License Agreement (CLA)
+
+By contributing to this repository you agree to the following terms:
+1. You grant to the Project Owner a perpetual, worldwide, non-exclusive, royalty-free license to use, reproduce, modify, distribute, and sublicense your contributions under the repository license(s).
+2. You warrant that you have the right to grant this license and that your contribution does not infringe third-party rights.
+3. You agree to follow the project's Code of Conduct and security reporting procedures
+
+Project Owner
+Name: 15389089 Canada Inc.
+Representative:
+Date:
+Signature:
+Creative Commons Attribution 4.0 International
+https://creativecommons.org/licenses/by/4.0/legalcode
+
+[Insert full CC BY 4.0 legal code or link to official text.]
+Apache License
+                           Version 2.0, January 2004
+                        http://www.apache.org/licenses/
+
+TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION.
+[Full Apache 2.0 text should be inserted here. Use the official Apache 2.0 license file from apache.org.]
+
+# DWVSCPS Energy Industrial Control Design Kit
+
+Purpose
+Provide an auditable, standards-aligned design kit for ventilated secondary containment pipeline systems (DWVSCPS), SCADA telemetry auditing (SMT3), and CCUS tax credit evidence mapping.
+
+Disclaimer
+This repository contains draft policy, technical specifications, and legal templates for counsel review. It is not legal advice and does not create enforceable rights. Consult legislative counsel, tax counsel, and NRCan/CRA before filing or relying on these materials.
+
+Contents
+- LICENSE
+- README.md
+- CONTRIBUTING.md
+- CLA.md
+- CODE_OF_CONDUCT.md
+- SECURITY.md
+- docs/
+  - policy/legislative-concept.md
+  - policy/house-procedure-mapping.md
+  - ccus/ccus-evidence-checklist.md
+  - engineering/dwvscps-specification.md
+  - telemetry/scada-telemetry-schema.yaml
+  - audit/audit-formulas.md
+  - validation/test-protocols.md
+  - legal/court-exhibits/
+    - chain-of-custody-template.md
+    - affidavit-template.md
+- src/
+  - telemetry/
+  - simulations/
+  - examples/
+
+How to use
+1. Review docs/policy/legislative-concept.md with legislative counsel.
+2. Place notarizable exhibits in a secure private vault; publish non-sensitive artifacts publicly.
+3. Use CLA for contributor IP management.
+4. Prepare NRCan/CRA evidence package per docs/ccus/ccus-evidence-checklist.md.
+
+Primary contacts
+- Inventor and rights claimant: Richard Evan Stockford Jr
+- Primary custodian entity: 15389089 Canada Inc.
+# DWVSCPS Energy Industrial Control Design Kit
+
+Purpose
+Provide an auditable, standards-aligned design kit for ventilated secondary containment pipeline systems (DWVSCPS), SCADA telemetry auditing (SMT3), and CCUS tax credit evidence mapping.
+
+Disclaimer
+This repository contains draft policy, technical specifications, and legal templates for counsel review. It is not legal advice and does not create enforceable rights. Consult legislative counsel, tax counsel, and NRCan/CRA before filing or relying on these materials.
+
+Contents
+- LICENSE
+- README.md
+- CONTRIBUTING.md
+- CLA.md
+- CODE_OF_CONDUCT.md
+- SECURITY.md
+- docs/
+  - policy/legislative-concept.md
+  - policy/house-procedure-mapping.md
+  - ccus/ccus-evidence-checklist.md
+  - engineering/dwvscps-specification.md
+  - telemetry/scada-telemetry-schema.yaml
+  - audit/audit-formulas.md
+  - validation/test-protocols.md
+  - legal/court-exhibits/
+    - chain-of-custody-template.md
+    - affidavit-template.md
+- src/
+  - telemetry/
+  - simulations/
+  - examples/
+
+How to use
+1. Review docs/policy/legislative-concept.md with legislative counsel.
+2. Place notarizable exhibits in a secure private vault; publish non-sensitive artifacts publicly.
+3. Use CLA for contributor IP management.
+4. Prepare NRCan/CRA evidence package per docs/ccus/ccus-evidence-checklist.md.
+
+Primary contacts
+- Inventor and rights claimant: Richard Evan Stockford Jr
+- Primary custodian entity: 15389089 Canada Inc.
 # Oil-Spill-RecoveryMaster Legal and Financial Architecture of the DWVSCPS Energy Anti-Theft and Asset Protection Framework
 Legal Provenance and Corporate Infrastructure of 15389089 Canada Inc.
 The validation of industrial assets within sovereign legal systems requires a structured corporate vehicle designed to manage licensing, auditing, and asset protection covenants. To establish this framework, 15389089 Canada Inc. was incorporated under the Canada Business Corporations Act (CBCA), serving as the master vendor entity through which all licensing rights and enforcement protocols are managed.
