@@ -77,9 +77,7 @@ Creative Commons Attribution 4.0 International (for docs and drawings)
 
 `
 Creative Commons Attribution 4.0 International
-https://creativecommons.org/licenses/by/4.0/legalcode
-
-[Insert full CC BY 4.0 legal code or link to official text.]
+https://creativecommons.org/licenses/by/4.0 legal standpoint
 `
 
 ---
@@ -94,11 +92,6 @@ By contributing to this repository you agree to the following terms:
 2. You warrant that you have the right to grant this license and that your contribution does not infringe third-party rights.
 3. You agree to follow the project's Code of Conduct and security reporting procedures.
 
-Contributor
-Name:
-Email:
-Date:
-Signature:
 
 Project Owner
 Name: 15389089 Canada Inc.
@@ -140,18 +133,13 @@ Reporting a Vulnerability
 - Email: security@dwvscps.example
 - PGP key: [insert PGP fingerprint]
 
-Process
-1. Acknowledge receipt within 48 hours.
-2. Coordinate disclosure timeline with reporter.
-3. Publish a CVE and advisory after mitigation.
 
 Sensitive Artifacts
 Store notarizable exhibits and vendor IP in a private vault with RBAC and audit logging.
 `
 
----
 
-House formatted draft bill English text (copy‑paste ready)
+House formatted draft bill English 
 
 `
 House of Commons
@@ -256,7 +244,7 @@ References for counsel
 
 ---
 
-CCUS ITC evidence checklist and Class mapping (paste into docs/ccus/ccus-evidence-checklist.md)
+CCUS ITC evidence checklist and Class mapping lifecycle main vein energy cycle miltary grade stealth underdog mode leadership ownership rights ©️ ™️ SECRETS 
 
 `
 CCUS ITC Evidence Checklist
@@ -286,12 +274,7 @@ Independent verification
 Class mapping guidance
 - Class 57: Specialized carbon capture equipment (separation units)
 - Class 58: Transmission and storage infrastructure for captured CO2
-- Note: Final class eligibility determined by NRCan and CRA verification
-
-Submission steps
-1. Prepare evidence package per NRCan guidance.
-2. Submit to NRCan for technical verification.
-3. Upon NRCan confirmation, file CRA claim with supporting exhibits.
+- Note: Final class eligibility determined by NRCan and CRA verification AI verified results of fraudlent activitys that's non conduct but imprisonment for the false advertising financial statements and news reports without concent
 `
 
 ---
@@ -371,40 +354,22 @@ chain-of-custody-template.md
 `
 Chain of Custody for Telemetry Exhibit
 
-Exhibit ID:
-Description:
-Collected by:
-Collection location:
-Collection timestamp (UTC):
-Initial hash:
-Custody log:
-- DateTime UTC | From | To | Transfer hash | Notes
 
 Certification
 I certify under oath that the above chain of custody is complete and accurate.
-Name:
-Title:
-Signature:
-Date:
-`
+Name:Richard Evan Stockford Intelleucal captial creations 
 
 affidavit-template.md
 `
 Affidavit of Authentication
 
-I, [Name], of [City], in the Province of [Province], MAKE OATH AND SAY AS FOLLOWS:
-1. I am [position] of [entity] and have personal knowledge of the matters herein.
-2. The attached telemetry batch identified as Exhibit [ID] was collected on [date] at [location].
-3. The telemetry batch hash is [hash]. The chain of custody is recorded in the attached log.
-4. The telemetry was signed using the private key of [signer_id] and the certificate chain is attached.
-5. I swear this affidavit for the purpose of authenticating the telemetry exhibit in [court name].
+I, Richard Evan Stockford jr ,calagry in the Province of [Province], MAKE OATH AND SAY AS A
 
 Sworn before me at [place] on [date].
 Commissioner for Oaths / Notary Public
 Signature:
 `
-
----
+Richard Evan Stockford leadership rights to tech 
 
 Final instructions for filing and counsel handoff
 - Do not file the draft bill without parliamentary counsel certification. Provide the legislative-concept.md and this bill text to Parliamentary Counsel for formal drafting and bilingual translation.
