@@ -127,11 +127,6 @@ Prepared for judicial review — Calgary Court Registry acceptance.
 - Audit formulas (LaTeX ready for audit-formulas.md)  
 - Chain of custody and affidavit templates for court exhibits and notarizable telemetry evidence
 
----
-
-Repository README (paste into README.md)
-
-`
 
 DWVSCPS Energy Industrial Control Design Kit
 
@@ -162,13 +157,7 @@ Contents
 - src/
   - telemetry/
   - simulations/
-  - examples/
-
-How to use
-1. Review docs/policy/legislative-concept.md with legislative counsel.
-2. Place notarizable exhibits in a secure private vault; publish non-sensitive artifacts publicly.
-3. Use CLA for contributor IP management.
-4. Prepare NRCan/CRA evidence package per docs/ccus/ccus-evidence-checklist.md.
+  - examples
 
 Primary contacts
 - Inventor and rights claimant: Richard Evan Stockford Jr
@@ -178,7 +167,7 @@ Primary contacts
 
 ---
 
-LICENSE snippets (paste into LICENSE files)
+LICENSE snippets
 
 Apache 2.0 (for code and telemetry schemas)
 
@@ -220,7 +209,7 @@ Signature:
 
 ---
 
-CODEOFCONDUCT.md (paste)
+CODEOFCONDUCT.md
 
 `
 Contributor Covenant Code of Conduct
@@ -240,16 +229,10 @@ Contact
 Report incidents to: security@dwvscps.example (replace with project contact)
 `
 
----
-
-SECURITY.md (paste)
+SECURITY.md
 
 `
 Security Policy
-
-Reporting a Vulnerability
-- Email: security@dwvscps.example
-- PGP key: [insert PGP fingerprint]
 
 
 Sensitive Artifacts
@@ -261,9 +244,8 @@ House formatted draft bill English
 
 `
 House of Commons
-Session [], Parliament []
 
-BILL C[] — An Act to Enhance Critical Pipeline Infrastructure Security, Standardize Automated Audit Telemetry, and Establish the Voluntary Clean-Tech Insurance Protection Framework
+BILL— An Act to Enhance Critical Pipeline Infrastructure Security, Standardize Automated Audit Telemetry, and Establish the Voluntary Clean-Tech Insurance Protection Framework
 
 Preamble
 Whereas the protection of critical midstream energy infrastructure and the preservation of Canadian environmental resources are of national importance;
@@ -324,10 +306,6 @@ This Act comes into force on a day to be fixed by order of the Governor in Counc
 EXPLANATORY NOTE
 This Bill establishes performance-based requirements for ventilated secondary containment, SCADA telemetry auditing, and a framework for mapping verified assets to CCUS tax credit classifications. It provides for regulatory coordination, telemetry standards, and independent verification requirements.
 
-`
-
----
-
 Policy annex mapping to House Procedure and Standing Orders (paste into docs/policy/house-procedure-mapping.md)
 
 `
@@ -358,9 +336,7 @@ References for counsel
 - House of Commons Procedure and Practice Fourth Edition 2025 Chapter 16, 21, 23.
 - Standing Orders of the House of Commons Chapters VI, VIII, IX, XI, XIII, XV.
 - LEGISinfo for tracking and ownership records.
-`
 
----
 
 CCUS ITC evidence checklist and Class mapping lifecycle main vein energy cycle miltary grade stealth underdog mode leadership ownership rights ©️ ™️ SECRETS 
 
@@ -393,11 +369,8 @@ Class mapping guidance
 - Class 57: Specialized carbon capture equipment (separation units)
 - Class 58: Transmission and storage infrastructure for captured CO2
 - Note: Final class eligibility determined by NRCan and CRA verification AI verified results of fraudlent activitys that's non conduct but imprisonment for the false advertising financial statements and news reports without concent
-`
 
----
-
-SCADA telemetry schema YAML (paste into scada-telemetry-schema.yaml)
+SCADA telemetry schema YAML
 
 `yaml
 schema_version: 1.0
@@ -434,7 +407,7 @@ chainofcustody:
 
 ---
 
-Audit formulas (paste into audit/audit-formulas.md)
+Audit formulas
 
 `
 Audit Formulas
@@ -512,8 +485,6 @@ By contributing to this repository you agree to the following terms:
 Project Owner
 Name: 15389089 Canada Inc.
 Representative:
-Date:
-Signature:
 Creative Commons Attribution 4.0 International
 https://creativecommons.org/licenses/by/4.0/legalcode
 
@@ -556,11 +527,6 @@ Contents
   - simulations/
   - examples/
 
-How to use
-1. Review docs/policy/legislative-concept.md with legislative counsel.
-2. Place notarizable exhibits in a secure private vault; publish non-sensitive artifacts publicly.
-3. Use CLA for contributor IP management.
-4. Prepare NRCan/CRA evidence package per docs/ccus/ccus-evidence-checklist.md.
 
 Primary contacts
 - Inventor and rights claimant: Richard Evan Stockford Jr
@@ -595,12 +561,6 @@ Contents
   - telemetry/
   - simulations/
   - examples/
-
-How to use
-1. Review docs/policy/legislative-concept.md with legislative counsel.
-2. Place notarizable exhibits in a secure private vault; publish non-sensitive artifacts publicly.
-3. Use CLA for contributor IP management.
-4. Prepare NRCan/CRA evidence package per docs/ccus/ccus-evidence-checklist.md.
 
 Primary contacts
 - Inventor and rights claimant: Richard Evan Stockford Jr
@@ -977,8 +937,6 @@ Last Updated: March 2026
 What's new?
 
 
-Print
- Expand All
 Microsoft Privacy Statement
 Personal data we collect
 Cookies
@@ -987,7 +945,6 @@ Most Microsoft sites use cookies, small text files placed on your device which w
 EU-U.S., UK Extension, and Swiss-U.S. Data Privacy Frameworks
 Microsoft complies with the EU-U.S., UK Extension to the EU-U.S., and Swiss-U.S. Data Privacy Frameworks. To learn more, see the Where we store and process personal data section, and visit the U.S. Department of Commerce’s Data Privacy Framework website.
 
-Contact us
 If you have a privacy concern, complaint, or question for the Microsoft privacy team or Data Protection Officer, please visit our privacy support and requests page and click on “Contact the Microsoft privacy team or the Microsoft Data Protection Officer” menu. For more information about contacting Microsoft, including Microsoft Ireland Operations Limited, see the How to contact us section of this privacy statement.
 
 Your privacy is important to us. This privacy statement explains the personal data Microsoft processes, how Microsoft processes it, and for what purposes.
@@ -1007,9 +964,6 @@ If you represent an organisation, such as a business or school, that utilises En
 
 You have choices when it comes to the technology you use and the data you share. When we ask you to provide personal data, you can decline. Many of our products require some personal data to provide you with a service. If you choose not to provide data -required to provide you with a product or feature, you cannot use that product or feature. Likewise, where we need to collect personal data by law or to enter into or carry out a contract with you, and you do not provide the data, we will not be able to enter into the contract; or if this relates to an existing product you are using, we may have to suspend or cancel it. We will notify you if this is the case at the time. Where providing the data is optional, and you choose not to share personal data, features such as personalisation that use such data will not work for you.
 
-Learn more
-Back to top
-
 How we use personal data
 Microsoft uses the data we collect to provide you with rich, interactive experiences. In particular, we use data to:
 
@@ -1025,16 +979,10 @@ Our processing of personal data for these purposes includes both automated and m
 
 As part of our efforts to improve and develop our products, we may use your data to develop and train our AI models. Learn more here.
 
-Learn more
-Back to top
-
 Reasons we share personal data
 We share your personal data with your consent or to complete any transaction or provide any product you have requested or authorised. We also share data with Microsoft-controlled affiliates and subsidiaries; with vendors working on our behalf; when required by law or to respond to legal process; to protect our customers; to protect lives; to maintain the security of our products; and to protect the rights and property of Microsoft and its customers.
 
-Please note that, as defined under certain US state data privacy laws, “sharing” also relates to providing personal data to third parties for personalised advertising purposes. Please see the U.S. State Data Privacy section below and our U.S. State Data Privacy Laws Notice for more information.
-
-Learn more
-Back to top
+Please note that, as defined under certain US state data privacy laws, “sharing” also relates to providing personal data to third parties for personalised advertising purposes. Please see the U.S. State Data Privacy section below and our U.S. State Data Privacy Laws Notice for more information
 
 How to access and control your personal data
 You can also make choices about the collection and use of your data by Microsoft. You can control your personal data that Microsoft has obtained, and exercise your data protection rights, by contacting Microsoft or using various tools we provide. In some cases, your ability to access or control your personal data will be limited, as required or permitted by applicable law. How you can access or control your personal data will also depend on which products you use. For example, you can:
@@ -1046,8 +994,6 @@ Not all personal data processed by Microsoft can be accessed or controlled via t
 
 We provide aggregate metrics about user requests to exercise their data protection rights via the Microsoft Privacy Report.
 
-Learn more
-Back to top
 
 Cookies and similar technologies
 Cookies are small text files placed on your device to store data that can be recalled by a web server in the domain that placed the cookie. We use cookies and similar technologies for storing and honouring your preferences and settings, enabling you to sign-in, providing interest-based advertising, combating fraud, analysing how our products perform and fulfilling other legitimate purposes. Microsoft apps use additional identifiers, such as the advertising ID in Windows described in the Advertising ID section of this privacy statement, for similar purposes.
@@ -1059,9 +1005,6 @@ Third party cookies may include: Social Media cookies designed to show you ads a
 Please see the Learn more section below for information about our use of third party cookies, web beacons and analytics services, and other similar technologies on our websites and services. For a list of the third parties that set cookies on our websites, including service providers acting on our behalf, please visit our third party cookie inventory. On some of our websites, a list of third parties is available directly on the site. The third parties on these sites may not be included in the list on our third party cookie inventory.
 
 You have a variety of tools to control the data collected by cookies, web beacons, and similar technologies. For example, you can use controls in your internet browser to limit how the websites you visit are able to use cookies and to withdraw your consent by clearing or blocking cookies.
-
-Learn more
-Back to top
 
 Products provided by your organisation – notice to end users
 If you use a Microsoft product with an account provided by an organisation you are affiliated with, such as your work or school account, that organisation can:
@@ -1093,22 +1036,13 @@ When you or your organisation (such as an employer or your school) create your M
 When you or your service provider (such as a cable or internet service provider) create your Microsoft account tied to your email address with your service provider’s domain, we refer to that account as a third-party account.
 If you sign into a service offered by a third party with your Microsoft account, you will share with that third party the account data required by that service.
 
-Learn more
-Back to top
-
 Collection of data from children
 For users under the age of 13, or as specified by law in their jurisdiction, certain Microsoft products and services will either block users under that age or will ask them to obtain consent or authorisation from a parent or guardian before they can use it, including when creating an account to access Microsoft services. We will not knowingly ask children under that age to provide more data than is required to provide for the product.
 
-Once parental consent or authorisation has been granted, the child’s account is treated much like any other account. Learn more about personal and school accounts in the Microsoft account section of the Privacy Statement and Microsoft Family Safety in the product-specific section. The child can access communication services, like Outlook and Teams, and can freely communicate and share data with other users of all ages. Parents or guardians can change or revoke the consent choices previously made. Learn more about parental consent and Microsoft child accounts. As the organiser of a Microsoft family group, the parent or guardian can manage their child’s information and settings on their Family Safety page and view and delete a child’s data on their privacy dashboard. Accounts that require parental consent to be created are automatically included as part of the family group of the individual who provided the consent for account creation. For child accounts that do not require parental consent to be created, (e.g., for children who are over the age at which parental consent is legally required), the parent or guardian may still use a family group, but must add the child account to their family group after the account is created. Select Learn more below for more information about how to access and delete child data and information about children and Xbox profiles.
-
-Learn more
-Back to top
+Once parental consent or authorisation has been granted, the child’s account is treated much like any other account. Learn more about personal and school accounts in the Microsoft account section of the Privacy Statement and Microsoft Family Safety in the product-specific section. The child can access communication services, like Outlook and Teams, and can freely communicate and share data with other users of all ages. Parents or guardians can change or revoke the consent choices previously made. Learn more about parental consent and Microsoft child accounts. As the organiser of a Microsoft family group, the parent or guardian can manage their child’s information and settings on their Family Safety page and view and delete a child’s data on their privacy dashboard. Accounts that require parental consent to be created are automatically included as part of the family group of the individual who provided the consent for account creation. For child accounts that do not require parental consent to be created, (e.g., for children who are over the age at which parental consent is legally required), the parent or guardian may still use a family group, but must add the child account to their family group after the account is created. Select Learn more below for more information about how to access and delete child data and information about children and Xbox profile
 
 Other important privacy information
-Below you will find additional privacy information, such as how we secure your data, where we process your data, and how long we retain your data. You can find more information on Microsoft and our commitment to protecting your privacy at Microsoft Privacy.
-
-Learn more
-Back to top
+Below you will find additional privacy information, such as how we secure your data, where we process your data, and how long we retain your data. You can find more information on Microsoft and our commitment to protecting your privacy at Microsoft Privacy
 
 Artificial Intelligence and Copilot capabilities
 Microsoft leverages the power of artificial intelligence (AI) in many of our products and services, including by incorporating generative AI “Copilot” capabilities. Microsoft’s deployment and use of AI is subject to Microsoft’s AI Principles and Microsoft’s Responsible AI Standard, and Microsoft’s collection and use of personal data in developing and deploying AI features is consistent with the commitments outlined in this privacy statement. Product-specific details provide additional relevant information. You can find out more about the tools, practices, and policies Microsoft has created to uphold our responsible AI principles here.
@@ -1162,14 +1096,8 @@ Back to top
 Productivity and communications products
 Productivity and communications products are applications, software, and services you can use to create, store, and share documents, as well as communicate with others.
 
-Learn more
-Back to top
-
 Search and browse
 Search and browse products connect you with information and intelligently sense, process, and act on information—learning and adapting over time. For more information on artificial intelligence and Copilot capabilities in Microsoft’s search products, please see Artificial Intelligence and Microsoft Copilot capabilities section above.
-
-Learn more
-Back to top
 
 Windows
 Windows is a personalised computing environment that enables you to seamlessly roam and access services, preferences and content across your computing devices from phones to tablets to the Surface Hub. Rather than residing as a static software programme on your device, key components of Windows are cloud-based, and both cloud and local elements of Windows are updated regularly, providing you with the latest improvements and features. In order to provide this computing experience, we collect data about you, your device, and the way you use Windows. And because Windows is personal to you, we give you choices about the personal data we collect and how we use it. Note that if your Windows device is managed by your organisation (such as your employer or school), your organisation may use centralised management tools provided by Microsoft or others to access and process your data and to control device settings (including privacy settings), device policies, software updates, data collection by us or the organisation, or other aspects of your device. Additionally, your organisation may use management tools provided by Microsoft or others to access and process your data from that device, including your interaction data, diagnostic data and the contents of your communications and files.
@@ -1182,18 +1110,11 @@ Network Configuration: Adjust networking settings, including WiFi, Ethernet, mob
 Account Management: Add or remove user accounts, change account settings, and manage sign-in options.
 System-Level Options: Configure display settings, notifications, power options, manage list of installed apps and more.
 Privacy & security management: configure your privacy preferences such as location, collection of diagnostic data etc. Fine-tune which individual apps and services can access device capabilities by turning them on or off.
-For more information about data collection in Windows, see Data collection summary for Windows. This statement discusses Windows 10 and Windows 11 and references to Windows in this section relate to those product versions. Earlier versions of Windows (including Windows Vista, Windows 7, Windows 8, and Windows 8.1) are subject to their own privacy statements.
-
-Learn more
-Back to top
+For more information about data collection in Windows, see Data collection summary for Windows. This statement discusses Windows 10 and Windows 11 and references to Windows in this section relate to those product versions. Earlier versions of Windows (including Windows Vista, Windows 7, Windows 8, and Windows 8.1) are subject to their own privacy statements
 
 Entertainment and related services
 Entertainment and Related Services power rich experiences and enable you to access a variety of content, applications and games.
 
-Learn more
-Back to top
-
- Back To Top
 Your Privacy Choices
 Consumer Health Privacy
 Contact Microsoft
