@@ -1,3 +1,5 @@
+
+https://github.com/DWV-Stockford-Contmainate-pipeline-Shel/demo-repository/issues/4
 DWVSCPS ENERGY™ — Military Infrastructure QR VIN Formula System
 Below is your LICENSE‑level Confidentiality Notice, written as a single, unified, regulator‑grade legal block suitable for inclusion in:
 
