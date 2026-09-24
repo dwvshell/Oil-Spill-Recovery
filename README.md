@@ -1,3 +1,946 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+"""
+===============================================================================
+DWVSCPS ENERGY™ — MEGA ONE
+CANADABUYS / PSPC PROCUREMENT EVIDENCE REGISTER
+PYTHON + JSON API WORKLOAD SCROLL 📜
+===============================================================================
+
+Purpose:
+    Preserve and analyze CanadaBuys standing-offer and supply-arrangement
+    records using a controlled, auditable JSON structure.
+
+Important:
+    A CanadaBuys record is evidence of what the source dataset reports.
+    It does NOT automatically establish:
+        - a completed contract;
+        - a call-up;
+        - payment;
+        - performance;
+        - ownership;
+        - IP transfer;
+        - copying;
+        - liability;
+        - wrongdoing.
+
+CanadaBuys distinguishes:
+    Standing Offer (SO)
+    Supply Arrangement (SA)
+    Contract
+    Call-up against a Standing Offer
+    Contract against a Supply Arrangement
+
+A standing offer is not itself a contract. A call-up against it creates
+the binding contract. A supply arrangement is a procurement framework and
+does not itself create a purchase obligation.
+
+===============================================================================
+"""
+
+from __future__ import annotations
+
+import argparse
+import datetime as dt
+import hashlib
+import json
+import sqlite3
+from pathlib import Path
+from typing import Any, Dict, List, Optional
+
+
+# =============================================================================
+# SYSTEM
+# =============================================================================
+
+SYSTEM_ID = "DWVSCPS-ENERGY-MEGA-ONE-CANADABUYS-PROCUREMENT"
+VERSION = "2026.09.24"
+
+AUTHOR = "Richard Evan Stockford Jr."
+JURISDICTION = "Canada"
+
+MASTER_ANCHOR = (
+    "ff2e04fb710e5014fab79357a867dddf5fea1bc8720270a9e2ce7df76c553f77"
+)
+
+VAULT = Path("MEGAONE_CANADABUYS_VAULT")
+
+SOURCE_DIR = VAULT / "00_SOURCE_RECORDS"
+EVIDENCE_DIR = VAULT / "01_EVIDENCE"
+HASH_DIR = VAULT / "02_HASHES"
+EXPORT_DIR = VAULT / "03_EXPORTS"
+
+DATABASE = VAULT / "MEGA_ONE_CANADABUYS_AUDIT.sqlite3"
+
+OUTPUT_JSON = (
+    EXPORT_DIR /
+    "DWVSCPS_MEGA_ONE_CANADABUYS_PROCUREMENT_SCROLL.json"
+)
+
+
+# =============================================================================
+# STATUS CONTROL
+# =============================================================================
+
+STATUS_PRIMARY_VERIFIED = "PRIMARY_DOCUMENT_VERIFIED"
+STATUS_SECONDARY = "SECONDARY_SOURCE_CORROBORATED"
+STATUS_ASSERTION = "DOCUMENTED_ASSERTION"
+STATUS_UNPROVEN = "UNPROVEN"
+STATUS_REQUIRES_PRIMARY = "REQUIRES_PRIMARY_SOURCE"
+STATUS_NOT_CONTRACT = "NOT_A_CONTRACT_BY_ITSELF"
+STATUS_REQUIRES_RECONCILIATION = "REQUIRES_CONTRACT_RECONCILIATION"
+
+
+# =============================================================================
+# TIME / HASH
+# =============================================================================
+
+def utc_now() -> str:
+    return (
+        dt.datetime.now(dt.timezone.utc)
+        .replace(microsecond=0)
+        .isoformat()
+        .replace("+00:00", "Z")
+    )
+
+
+def canonical_json(value: Any) -> bytes:
+    return json.dumps(
+        value,
+        sort_keys=True,
+        ensure_ascii=False,
+        separators=(",", ":"),
+    ).encode("utf-8")
+
+
+def sha256_json(value: Any) -> str:
+    return hashlib.sha256(
+        canonical_json(value)
+    ).hexdigest()
+
+
+# =============================================================================
+# VAULT
+# =============================================================================
+
+def initialize_vault() -> None:
+
+    for directory in (
+        VAULT,
+        SOURCE_DIR,
+        EVIDENCE_DIR,
+        HASH_DIR,
+        EXPORT_DIR,
+    ):
+        directory.mkdir(
+            parents=True,
+            exist_ok=True
+        )
+
+
+# =============================================================================
+# DATA DICTIONARY
+# =============================================================================
+
+DATA_DICTIONARY = {
+
+    "agreement-number": {
+        "type": "string",
+        "description_en": (
+            "Unique identifier for the standing offer or supply arrangement."
+        ),
+        "description_fr": (
+            "Code d'identification unique de l'offre à commandes "
+            "ou de l'arrangement en matière d'approvisionnement."
+        ),
+        "required": True,
+    },
+
+    "agreement-type_en": {
+        "type": "string",
+        "description_en": (
+            "Type of agreement, including supply arrangement or "
+            "standing-offer type."
+        ),
+        "description_fr": (
+            "Type d'accord, notamment arrangement en matière "
+            "d'approvisionnement ou type d'offre à commandes."
+        ),
+        "allowed_values": [
+            "Supply Arrangement",
+            "National Master Standing Offer",
+            "Departmental Individual Standing Offer",
+            "Regional Individual Standing Offer",
+            "Regional Master Standing Offer",
+            "National Individual Standing Offer",
+        ],
+        "required": True,
+    },
+
+    "agreement-type_fr": {
+        "type": "string",
+        "description": (
+            "Type d'accord en français."
+        ),
+        "required": False,
+    },
+
+    "award-date": {
+        "type": "date",
+        "description_en": (
+            "Start date for the standing offer or supply arrangement."
+        ),
+        "description_fr": (
+            "Date de début de l'offre à commandes ou de "
+            "l'arrangement en matière d'approvisionnement."
+        ),
+        "required": False,
+    },
+
+    "commodity": {
+        "type": "string",
+        "description_en": (
+            "Federal commodity code identifying the generic product "
+            "or service description."
+        ),
+        "description_fr": (
+            "Code de produit utilisé par le gouvernement fédéral."
+        ),
+        "required": False,
+    },
+
+    "commodity-description_en": {
+        "type": "string",
+        "description_en": (
+            "Description of the good or service corresponding to "
+            "the commodity code."
+        ),
+        "required": False,
+    },
+
+    "commodity-description_fr": {
+        "type": "string",
+        "description_fr": (
+            "Description du bien ou du service correspondant "
+            "au code du produit."
+        ),
+        "required": False,
+    },
+
+    "date-file-published": {
+        "type": "datetime",
+        "description_en": (
+            "Date and time when the source file was published."
+        ),
+        "description_fr": (
+            "Date et heure de publication du fichier source."
+        ),
+        "required": False,
+    },
+
+    "delivery-point_en": {
+        "type": "string",
+        "description_en": (
+            "Geographic coverage or delivery region."
+        ),
+        "required": False,
+    },
+
+    "delivery-point_fr": {
+        "type": "string",
+        "description_fr": (
+            "Couverture géographique ou région de livraison."
+        ),
+        "required": False,
+    },
+
+    "delivery-point-code": {
+        "type": "string",
+        "description_en": (
+            "Geographic code identifying Canadian provinces, "
+            "territories or special national categories."
+        ),
+        "required": False,
+    },
+
+    "end-user-entity_en": {
+        "type": "string",
+        "description_en": (
+            "Entity on whose behalf the standing offer or supply "
+            "arrangement was established."
+        ),
+        "required": False,
+    },
+
+    "end-user-entity_fr": {
+        "type": "string",
+        "description_fr": (
+            "Entité au nom de laquelle l'offre à commandes ou "
+            "l'arrangement a été établi."
+        ),
+        "required": False,
+    },
+
+    "expiry-date": {
+        "type": "date",
+        "description_en": (
+            "End date of the standing offer or supply arrangement."
+        ),
+        "description_fr": (
+            "Date de fin de l'offre à commandes ou de "
+            "l'arrangement en matière d'approvisionnement."
+        ),
+        "required": False,
+    },
+
+    "sosa-description_en": {
+        "type": "string",
+        "description_en": (
+            "Brief description of the good or service."
+        ),
+        "required": False,
+    },
+
+    "sosa-description_fr": {
+        "type": "string",
+        "description_fr": (
+            "Brève description du bien ou du service."
+        ),
+        "required": False,
+    },
+
+    "supplier-legal-name": {
+        "type": "string",
+        "description_en": (
+            "Registered legal name of the supplier entity."
+        ),
+        "description_fr": (
+            "Dénomination sociale enregistrée du fournisseur."
+        ),
+        "required": True,
+    },
+
+    "supplier-operating-name": {
+        "type": "string",
+        "description_en": (
+            "Business or operating name used by the supplier."
+        ),
+        "description_fr": (
+            "Nom commercial ou nom d'exploitation du fournisseur."
+        ),
+        "required": False,
+    },
+
+    "supplier-standardized-name": {
+        "type": "string",
+        "description_en": (
+            "Standardized supplier name used to group closely "
+            "related supplier records."
+        ),
+        "description_fr": (
+            "Nom normalisé permettant de regrouper les dossiers "
+            "de fournisseurs étroitement liés."
+        ),
+        "required": False,
+    },
+}
+
+
+# =============================================================================
+# PROCUREMENT RECORD
+# =============================================================================
+
+def create_procurement_record(
+    source_record: Dict[str, Any]
+) -> Dict[str, Any]:
+
+    agreement_type = source_record.get(
+        "agreement-type_en"
+    )
+
+    if agreement_type == "Supply Arrangement":
+        legal_character = "PROCUREMENT_FRAMEWORK"
+        contract_status = STATUS_NOT_CONTRACT_BY_ITSELF \
+            if False else STATUS_NOT_CONTRACT
+    elif agreement_type:
+        legal_character = "STANDING_OFFER"
+        contract_status = STATUS_NOT_CONTRACT
+    else:
+        legal_character = "UNCLASSIFIED"
+        contract_status = STATUS_REQUIRES_PRIMARY
+
+    return {
+
+        "record_id": (
+            "CB-" +
+            hashlib.sha256(
+                canonical_json(source_record)
+            ).hexdigest()[:16].upper()
+        ),
+
+        "record_type": "CANADABUYS_PROCUREMENT_RECORD",
+
+        "source": {
+            "system": "CanadaBuys",
+            "dataset": "Standing Offers / Supply Arrangements",
+            "source_record_hash": sha256_json(source_record),
+            "retrieved_at_utc": utc_now(),
+        },
+
+        "procurement": {
+
+            "agreement_number":
+                source_record.get("agreement-number"),
+
+            "agreement_type_en":
+                source_record.get("agreement-type_en"),
+
+            "agreement_type_fr":
+                source_record.get("agreement-type_fr"),
+
+            "award_date":
+                source_record.get("award-date"),
+
+            "expiry_date":
+                source_record.get("expiry-date"),
+
+            "commodity":
+                source_record.get("commodity"),
+
+            "commodity_description_en":
+                source_record.get(
+                    "commodity-description_en"
+                ),
+
+            "commodity_description_fr":
+                source_record.get(
+                    "commodity-description_fr"
+                ),
+
+            "sosa_description_en":
+                source_record.get(
+                    "sosa-description_en"
+                ),
+
+            "sosa_description_fr":
+                source_record.get(
+                    "sosa-description_fr"
+                ),
+
+            "delivery_point_en":
+                source_record.get(
+                    "delivery-point_en"
+                ),
+
+            "delivery_point_fr":
+                source_record.get(
+                    "delivery-point_fr"
+                ),
+
+            "delivery_point_code":
+                source_record.get(
+                    "delivery-point-code"
+                ),
+
+            "end_user_entity_en":
+                source_record.get(
+                    "end-user-entity_en"
+                ),
+
+            "end_user_entity_fr":
+                source_record.get(
+                    "end-user-entity_fr"
+                ),
+
+            "date_file_published":
+                source_record.get(
+                    "date-file-published"
+                ),
+        },
+
+        "supplier": {
+
+            "legal_name":
+                source_record.get(
+                    "supplier-legal-name"
+                ),
+
+            "operating_name":
+                source_record.get(
+                    "supplier-operating-name"
+                ),
+
+            "standardized_name":
+                source_record.get(
+                    "supplier-standardized-name"
+                ),
+        },
+
+        "legal_character": legal_character,
+
+        "contract_control": {
+
+            "standing_offer_or_sa_is_contract": False,
+
+            "call_up_verified": False,
+
+            "resulting_contract_verified": False,
+
+            "contract_number": None,
+
+            "purchase_order_number": None,
+
+            "task_authorization": None,
+
+            "award_document": None,
+
+            "payment_record": None,
+
+            "status": contract_status,
+
+        },
+
+        "evidence_status": {
+            "record_status": STATUS_ASSERTION,
+            "primary_source_verified": False,
+            "source_bytes_hashed": False,
+            "independent_reconciliation": False,
+        },
+
+        "legal_firewall": {
+
+            "does_not_establish": [
+                "Contract award",
+                "Call-up",
+                "Payment",
+                "Performance",
+                "IP transfer",
+                "Technology adoption",
+                "Ownership",
+                "Copying",
+                "Causation",
+                "Liability",
+                "Wrongdoing",
+            ],
+
+            "legal_conclusion": (
+                "NOT_DETERMINED"
+            ),
+        },
+    }
+
+
+# =============================================================================
+# CONTRACT RECONCILIATION
+# =============================================================================
+
+def contract_reconciliation(
+    procurement_record: Dict[str, Any]
+) -> Dict[str, Any]:
+
+    control = procurement_record["contract_control"]
+
+    return {
+
+        "record_id":
+            procurement_record["record_id"],
+
+        "agreement_number":
+            procurement_record["procurement"]["agreement_number"],
+
+        "supplier":
+            procurement_record["supplier"]["legal_name"],
+
+        "standing_offer_or_sa":
+            True,
+
+        "contract_created_by_source_record":
+            False,
+
+        "required_follow_on_records": [
+
+            "Call-up Against a Standing Offer",
+
+            "Contract Against a Supply Arrangement",
+
+            "Purchase Order",
+
+            "Statement of Work",
+
+            "Task Authorization, if applicable",
+
+            "Award Notice",
+
+            "Executed Contract",
+
+            "Invoice",
+
+            "Payment Record",
+
+            "Acceptance / Receipt Record",
+
+        ],
+
+        "current_findings": {
+
+            "call_up_verified":
+                control["call_up_verified"],
+
+            "contract_verified":
+                control["resulting_contract_verified"],
+
+            "payment_verified":
+                control["payment_record"] is not None,
+
+        },
+
+        "status":
+            STATUS_REQUIRES_RECONCILIATION,
+    }
+
+
+# =============================================================================
+# PROCUREMENT PROPOSITION MATRIX
+# =============================================================================
+
+def proposition_matrix(
+    record: Dict[str, Any]
+) -> List[Dict[str, Any]]:
+
+    return [
+
+        {
+            "proposition_id": "CB-PROP-001",
+            "proposition": (
+                "The CanadaBuys source record identifies a standing "
+                "offer or supply arrangement."
+            ),
+            "evidence": record["source"],
+            "status": STATUS_PRIMARY_VERIFIED
+                if record["evidence_status"]
+                ["primary_source_verified"]
+                else STATUS_REQUIRES_PRIMARY,
+        },
+
+        {
+            "proposition_id": "CB-PROP-002",
+            "proposition": (
+                "The identified supplier appears in the source "
+                "procurement record."
+            ),
+            "evidence": [
+                record["supplier"]["legal_name"],
+                record["supplier"]["operating_name"],
+                record["supplier"]["standardized_name"],
+            ],
+            "status": STATUS_REQUIRES_PRIMARY,
+        },
+
+        {
+            "proposition_id": "CB-PROP-003",
+            "proposition": (
+                "A binding contract resulted from the procurement "
+                "instrument."
+            ),
+            "required_evidence": [
+                "Call-up",
+                "Executed contract",
+                "Award document",
+            ],
+            "status": STATUS_UNPROVEN,
+        },
+
+        {
+            "proposition_id": "CB-PROP-004",
+            "proposition": (
+                "Payment was made under the procurement arrangement."
+            ),
+            "required_evidence": [
+                "Invoice",
+                "Payment record",
+                "Government financial record",
+            ],
+            "status": STATUS_UNPROVEN,
+        },
+
+        {
+            "proposition_id": "CB-PROP-005",
+            "proposition": (
+                "A procurement record establishes technology ownership, "
+                "IP transfer, copying or adoption."
+            ),
+            "status": STATUS_UNPROVEN,
+            "legal_status": (
+                "NOT_ESTABLISHED_BY_CANADABUYS_RECORD_ALONE"
+            ),
+        },
+    ]
+
+
+# =============================================================================
+# MASTER SCROLL
+# =============================================================================
+
+def build_master_scroll(
+    source_record: Dict[str, Any]
+) -> Dict[str, Any]:
+
+    procurement = create_procurement_record(
+        source_record
+    )
+
+    scroll = {
+
+        "system_identity": {
+
+            "system_id": SYSTEM_ID,
+
+            "version": VERSION,
+
+            "author": AUTHOR,
+
+            "jurisdiction": JURISDICTION,
+
+            "master_anchor": MASTER_ANCHOR,
+
+            "generated_at_utc": utc_now(),
+
+        },
+
+        "data_dictionary": DATA_DICTIONARY,
+
+        "procurement_record": procurement,
+
+        "contract_reconciliation":
+            contract_reconciliation(procurement),
+
+        "proposition_matrix":
+            proposition_matrix(procurement),
+
+        "audit_controls": {
+
+            "append_only": True,
+
+            "canonical_json": True,
+
+            "sha256": True,
+
+            "external_transmission": False,
+
+            "human_authorization_required": True,
+
+            "legal_conclusions_automatically_generated": False,
+
+        },
+
+        "source_control": {
+
+            "source_authority":
+                "CanadaBuys / Government of Canada",
+
+            "source_verification":
+                STATUS_REQUIRES_PRIMARY,
+
+            "source_hash":
+                sha256_json(source_record),
+
+        },
+
+    }
+
+    scroll_hash = sha256_json(scroll)
+
+    scroll["integrity"] = {
+
+        "algorithm": "SHA-256",
+
+        "scroll_hash": scroll_hash,
+
+        "master_anchor": MASTER_ANCHOR,
+
+        "signature": None,
+
+        "signature_status":
+            "NOT_DIGITALLY_SIGNED",
+
+    }
+
+    return scroll
+
+
+# =============================================================================
+# EXPORT
+# =============================================================================
+
+def export_scroll(
+    scroll: Dict[str, Any]
+) -> Path:
+
+    initialize_vault()
+
+    with open(
+        OUTPUT_JSON,
+        "w",
+        encoding="utf-8"
+    ) as file:
+
+        json.dump(
+            scroll,
+            file,
+            indent=2,
+            ensure_ascii=False
+        )
+
+        file.write("\n")
+
+    return OUTPUT_JSON
+
+
+# =============================================================================
+# EXAMPLE INPUT
+# =============================================================================
+
+EXAMPLE_RECORD = {
+
+    "agreement-number":
+        "ENTER_CANADABUYS_AGREEMENT_NUMBER",
+
+    "agreement-type_en":
+        "Supply Arrangement",
+
+    "agreement-type_fr":
+        "Arrangement en matière d'approvisionnement",
+
+    "award-date":
+        None,
+
+    "commodity":
+        None,
+
+    "commodity-description_en":
+        None,
+
+    "commodity-description_fr":
+        None,
+
+    "date-file-published":
+        None,
+
+    "delivery-point_en":
+        None,
+
+    "delivery-point_fr":
+        None,
+
+    "delivery-point-code":
+        None,
+
+    "end-user-entity_en":
+        None,
+
+    "end-user-entity_fr":
+        None,
+
+    "expiry-date":
+        None,
+
+    "sosa-description_en":
+        None,
+
+    "sosa-description_fr":
+        None,
+
+    "supplier-legal-name":
+        None,
+
+    "supplier-operating-name":
+        None,
+
+    "supplier-standardized-name":
+        None,
+}
+
+
+# =============================================================================
+# CLI
+# =============================================================================
+
+def main() -> int:
+
+    parser = argparse.ArgumentParser(
+        description=(
+            "MEGA ONE CanadaBuys Procurement Evidence Scroll"
+        )
+    )
+
+    parser.add_argument(
+        "command",
+        choices=[
+            "dictionary",
+            "example",
+            "build",
+        ],
+        nargs="?",
+        default="build",
+    )
+
+    args = parser.parse_args()
+
+    initialize_vault()
+
+    if args.command == "dictionary":
+
+        print(
+            json.dumps(
+                DATA_DICTIONARY,
+                indent=2,
+                ensure_ascii=False
+            )
+        )
+
+        return 0
+
+    if args.command == "example":
+
+        print(
+            json.dumps(
+                EXAMPLE_RECORD,
+                indent=2,
+                ensure_ascii=False
+            )
+        )
+
+        return 0
+
+    scroll = build_master_scroll(
+        EXAMPLE_RECORD
+    )
+
+    output = export_scroll(scroll)
+
+    print("=" * 78)
+    print("MEGA ONE — CANADABUYS PROCUREMENT SCROLL")
+    print("=" * 78)
+    print(f"Output: {output}")
+    print(
+        f"SHA-256: "
+        f"{scroll['integrity']['scroll_hash']}"
+    )
+    print(
+        "External transmission: DISABLED"
+    )
+    print(
+        "Contract status: REQUIRES CONTRACT RECONCILIATION"
+    )
+    print("=" * 78)
+
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
+
 ENERGY FAMILY TRUST™ – OW DWVSCPS NERSHIP R. E. STOCKFORD JR / 15389089 CANADA INC. 
 Trademark: DWV STOCKFORD CONTAMINATE PIPELINE SHELL INC™ Patent-Pending (Government of Canada) TRUST VAULT: DWVSCPS_TRUST_VAULT_2026 
 # Declaration, Privileges, and Certificate Legal Compliance Package 
